@@ -1,0 +1,69 @@
+.close {
+  float: none;
+  vertical-align: baseline;
+  font-size: 16px;
+  line-height: 12px;
+}
+
+.typeaheadtags {
+  background-color: white;
+  border: 1px solid #CCC;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+
+}
+
+.typeaheadtags .typeahead {
+  border: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.tag-collection {
+  display:inline-block;
+  margin: 0px;
+}
+
+.typeaheadtags li {
+  display: inline-block;
+}
+
+.typeaheadtags .typeahead:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: 0;
+
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
+
+.tagitem{ 
+  display: inline-block;
+  margin: 0px 3px;
+}
+
+ul.typeahead li img {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  padding: 0px 0px 0px 10px;
+  vertical-align: top;
+}
+
+ul.typeahead li.active {
+  background-color: #08C;
+}
+
+ul.typeahead li a {
+  display: inline-block;
+}

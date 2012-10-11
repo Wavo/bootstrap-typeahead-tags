@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="typeaheadtags.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project name</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class='typeaheadtags'>
+        <ul class='tag-collection'>
+
+          <input class="typeahead" type="text">
+        </ul>
+      </div>      
+    </div> <!-- /container -->
+
+    <!-- e javascriptL
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="bootstrap/js/bootstrap-typeahead.js"></script>
+    <script src="typeaheadtags.js"></script>
+    <script>
+
+      // extend the typeahead render to deal with our rich query responses.
+      function typeaheadRender (items) {
+        var that = this
+
+        items = $(items).map(function (i, item) {
+          // attach the specific item object to the
+          // new element we're creating for it.
+          i = $(that.options.item).data('data-value', item)
+          // draw the text.
+          i.find('a').html(that.highlighter(item.fullName))
+          i.find('img').attr('src', item.avatar)
+          return i[0]
+        })
+
+        // activate the first item in the list.
+        items.first().addClass('active')
+        // finally: add to dom.
+        this.$menu.html(items)
+        return this
+      }      
+
+      // extend the typeahead matcher to deal with our rich query responses.
+      function typeaheadMatcher(item) {
+
+        return ~item.fullName.toLowerCase().indexOf(this.query.toLowerCase()) && this.query.length > 0;
+      }
+
+      // extend the typeahead sorter to deal with our rich query responses.
+      function typeaheadSorter (items) {
+        var beginswith = []
+          , caseSensitive = []
+          , caseInsensitive = []
+          , item
+
+        while (item = items.shift()) {
+          if (!item.fullName.toLowerCase().indexOf(this.query.toLowerCase())) beginswith.push(item)
+          else if (~item.fullName.indexOf(this.query)) caseSensitive.push(item)
+          else caseInsensitive.push(item)
+        }
+
+        return beginswith.concat(caseSensitive, caseInsensitive)
+      }      
+
+      function renderTag(val) {
+        var that = this
+          , tag = $('<li class="tagitem"></li>')
+          , closeButton = $('<button class="close">&times;</button>')
+          , tagSpan = $('<span class="badge badge-info"></span>')
+
+          // build out the tag element.
+          tag.attr('data-tag-id', this.tagCount);
+          tag.data('data-value', val);
+          tagSpan.text(val.fullName);      
+          tagSpan.prepend(closeButton);
+          tag.append(tagSpan);
+
+          // put the tag right before the typeahead input field.
+          this.$typeaheadElement.before(tag);
+
+          var index = this.tagCount;
+          // click the 'x', destroy the tag.
+          closeButton.on('click', function() { that.deleteTag(index); });        
+      }      
+
+      // query the friend list
+      function queryWavo(query, callback) {
+        var results = [
+        { 
+          source: 'wavo'
+        , fullName: 'Arlen Stalwick'
+        , username: 'arlen.stalwick'
+        , userId: '12341234'
+        , avatar: 'https://wavo.me/users/arlen/avatar/tiny'
+        }
+        ,{
+          source: 'facebook'
+        , fullName: 'Marilou Lavallee'
+        , userId: '123412341324'
+        , avatar: 'https://wavo.me/users/marilou/avatar/tiny'
+        }
+        ,{ source: 'wavo'
+        , fullName: 'test'
+        , userId: '12341234'
+        , avatar: 'https://wavo.me/static/img/avatar.png'
+        }];        
+        setTimeout(function(){ callback(results); }, 500);
+      }
+
+      $(function () {
+        $('.typeaheadtags').typeaheadTags({
+                  sorter: typeaheadSorter
+                , render: typeaheadRender
+                , matcher: typeaheadMatcher
+                , source: queryWavo
+                , renderTag: renderTag
+                , $tagCollection: $('.tag-collection')
+                , item: '<li><img></img><a href="#"></a></li>'
+              });
+      });
+    </script>
+   
+  </body>
+</html>
+
