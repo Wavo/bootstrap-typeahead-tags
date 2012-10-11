@@ -1,10 +1,4 @@
-.close {
-  float: none;
-  vertical-align: baseline;
-  font-size: 16px;
-  line-height: 12px;
-}
-
+/* main typeahead container - styled to look like an input */
 .typeaheadtags {
   background-color: white;
   border: 1px solid #CCC;
@@ -19,9 +13,9 @@
   -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
-
 }
 
+/* mods to the bootstrap typeahead input control */
 .typeaheadtags .typeahead {
   border: 0;
   -webkit-box-shadow: none;
@@ -34,10 +28,6 @@
   margin: 0px;
 }
 
-.typeaheadtags li {
-  display: inline-block;
-}
-
 .typeaheadtags .typeahead:focus {
   border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
@@ -47,23 +37,18 @@
           box-shadow: none;
 }
 
-.tagitem{ 
+.tagitem { 
   display: inline-block;
   margin: 0px 3px;
-}
-
-ul.typeahead li img {
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-  padding: 0px 0px 0px 10px;
-  vertical-align: top;
 }
 
 ul.typeahead li.active {
   background-color: #08C;
 }
 
-ul.typeahead li a {
-  display: inline-block;
+.close {
+  float: none;
+  vertical-align: baseline;
+  font-size: 16px;
+  line-height: 12px;
 }

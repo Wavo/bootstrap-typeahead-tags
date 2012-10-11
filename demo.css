@@ -1,0 +1,11 @@
+ul.typeahead li img {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  padding: 0px 0px 0px 10px;
+  vertical-align: top;
+}
+
+ul.typeahead li a {
+  display: inline-block;
+}
